@@ -44,4 +44,9 @@ public class Movie {
 	public void setMovieYear(String movieYear) {
 		this.movieYear = movieYear;
 	}
+
+	@Override
+	public String toString() {
+		return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieYear=" + movieYear + "]";
+	}
 }//end class
