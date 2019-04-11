@@ -4,11 +4,11 @@ import NavBar from '../NavBar/NavBar';
 
 class Home extends Component{
     render(){
-        const activeHome = "active";
+        const active = "home";
         return(
             <div class="mainHomeDiv">
                 <div class="topnav">
-                    <NavBar state={{activeHome:activeHome}}/>
+                    <NavBar data={active}/>
                 </div>
                 <div class="watchListBody">
                     This is the Home

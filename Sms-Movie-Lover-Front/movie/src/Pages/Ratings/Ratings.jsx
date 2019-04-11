@@ -5,10 +5,11 @@ import NavBar from '../NavBar/NavBar';
 
 class Ratings extends Component{
     render(){
+        const active = "rating";
         return(
             <div class="mainHomeDiv">
                 <div class="topnav">
-                    <NavBar/>
+                    <NavBar data={active}/>
                 </div>
                 <div class="watchListBody">
                     This is the Ratings Page

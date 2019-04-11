@@ -5,10 +5,11 @@ import NavBar from '../NavBar/NavBar';
 
 class WatchList extends Component{
     render(){
+        const active = "list";
         return(
             <div class="mainHomeDiv">
                 <div class="topnav">
-                    <NavBar/>
+                    <NavBar data={active}/>
                 </div>
                 <div class="watchListBody">
                     This is the watchList

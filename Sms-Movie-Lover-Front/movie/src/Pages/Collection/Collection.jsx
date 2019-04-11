@@ -5,10 +5,11 @@ import NavBar from '../NavBar/NavBar';
 
 class Collection extends Component{
     render(){
+        const active = "collection";
         return(
             <div class="mainHomeDiv">
                 <div class="topnav">
-                    <NavBar/>
+                    <NavBar data={active} />
                 </div>
                 <div class="watchListBody">
                     This is the Collection Page
