@@ -12,7 +12,7 @@ public class SmsMovieLoverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmsMovieLoverApplication.class, args);
 		MovieController controller = new MovieController();
-		controller.getAllMovies();
+//		controller.getAllMovies();
 //		String movieName = "Fairy Tale";
 //		String movieYear = "1999";
 //		double raterRating = 9.0;
