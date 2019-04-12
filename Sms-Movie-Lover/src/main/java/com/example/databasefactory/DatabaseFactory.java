@@ -11,7 +11,7 @@ public class DatabaseFactory {
 		Connection connection = null;
 		
 		try {
-			String url = "jdbc:postgresql://localhost:5433/movie";
+			String url = "jdbc:postgresql://localhost:5432/movie";
 			Properties props = new Properties();
 			props.setProperty("user","postgres");
 			props.setProperty("password","password");
