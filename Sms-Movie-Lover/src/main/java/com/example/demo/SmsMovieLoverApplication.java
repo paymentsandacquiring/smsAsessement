@@ -3,7 +3,7 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
- import com.movie.comtroller.MovieController;
+// import com.movie.comtroller.MovieController;
 
 
 @SpringBootApplication
@@ -11,8 +11,8 @@ public class SmsMovieLoverApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmsMovieLoverApplication.class, args);
-		MovieController controller = new MovieController();
-		controller.getAllMovies();
+//		MovieController controller = new MovieController();
+//		controller.getAllMovies();
 //		String movieName = "Fairy Tale";
 //		String movieYear = "1999";
 //		double raterRating = 9.0;

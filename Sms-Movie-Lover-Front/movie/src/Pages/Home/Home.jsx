@@ -11,7 +11,9 @@ class Home extends Component{
                     <NavBar data={active}/>
                 </div>
                 <div class="watchListBody">
-                    This is the Home
+                    <p>
+                         Welcome to the  SMS Movie Lover App, where you are able keep track of all the movie you have watched.
+                    </p>
                 </div>
             </div>
         );
