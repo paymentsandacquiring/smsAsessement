@@ -13,6 +13,7 @@ import com.example.demo.MovieCast;
 import com.example.demo.MovieGenre;
 import com.example.demo.MoviePublisher;
 import com.example.demo.MovieRater;
+import com.movie.model.DisplayMovie;
 
 public class MovieRepository {
 	private Connection connection = null;
@@ -181,6 +182,66 @@ public class MovieRepository {
 		}catch(SQLException sql) {
 			this.movieLogger.addEXCEPTION("Error updating movie table " + sql.getMessage());
 		}//end catch
+	}
+	public void getDisplayMovie() {
+		try {
+			Statement statement = this.connection.createStatement();
+			
+			String query = "SELECT * FROM movie";
+			
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				String movieId = resultSet.getString("movie_id");
+				String movieName = resultSet.getString("movie_name");
+				String movieYear = resultSet.getString("movie_year");
+				
+				getMovieGenres(movieId);
+				getMoviePublishers(movieId);
+				DisplayMovie displayMovie = new DisplayMovie(movieName, movieYear, this.movieResults.getMovieGenre(), this.movieResults.getMoviePublisher());
+				this.movieResults.setMovieDisplayResults(movieId, displayMovie);
+			}					
+		}catch(SQLException sql) {
+			this.movieLogger.addEXCEPTION("Error fetching data " + sql.getMessage());
+		}//end catch
+	}
+	
+	public void getMovieGenres(String mId) {
+		try {
+			Statement statement = this.connection.createStatement();
+			
+			String query = "SELECT movie.movie_id, movie_genre.genre_name FROM movie" + 
+					" INNER JOIN movie_genre_middle ON movie.movie_id = movie_genre_middle.movie_id" + 
+					" INNER JOIN movie_genre ON movie_genre_middle.genre_id = movie_genre.genre_id" + 
+					" WHERE movie.movie_id = '"+mId+"'";
+			
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()){
+				String movieGenre = resultSet.getString("genre_name");
+				
+				this.movieResults.setMovieGenre(movieGenre);
+			}
+		}catch (SQLException sql) {
+			this.movieLogger.addEXCEPTION("Error fetching data " + sql.getMessage());
+		}
+	}
+	public void getMoviePublishers(String pId) {
+		try {
+			Statement statement = this.connection.createStatement();
+			
+			String query = "SELECT movie.movie_id, movie_publisher.publisher_name FROM movie " + 
+					"INNER JOIN movie_publisher_middle ON movie.movie_id = movie_publisher_middle.movie_id " + 
+					"INNER JOIN movie_publisher ON movie_publisher_middle.publisher_id = movie_publisher.publisher_id " + 
+					"WHERE movie.movie_id = '"+pId+"'";
+			
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()){
+				String moviePublisher = resultSet.getString("publisher_name");
+				
+				this.movieResults.setMovieGenre(moviePublisher);
+			}
+		}catch (SQLException sql) {
+			this.movieLogger.addEXCEPTION("Error fetching data " + sql.getMessage());
+		}
 	}
 	
  	public int getIdUsingTwoCol(String columnName1, String columnName2, String tableName, String criteria1, String criteria2, String idColumnName) {

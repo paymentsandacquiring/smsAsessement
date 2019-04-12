@@ -1,4 +1,4 @@
-package com.movie.comtroller;
+package com.example.demo;
 
 import java.util.HashMap;
 import org.springframework.stereotype.Controller;
@@ -9,18 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.databasefactory.MovieLogger;
-import com.example.demo.Movie;
-import com.example.demo.MovieCast;
-import com.example.demo.MovieGenre;
-import com.example.demo.MoviePublisher;
-import com.example.demo.MovieRater;
+import com.movie.model.DisplayMovie;
 import com.movie.repository.MovieRepository;
 import com.movie.repository.MovieResults;
 import com.movie.service.MovieService;
 
 @Controller
 @CrossOrigin(origins="*")
-@RequestMapping(path="/formtest")
+@RequestMapping(path="/movie")
 public class MovieController {
 	private MovieService movieService;
 	
@@ -37,9 +33,27 @@ public class MovieController {
 	}
 	
 	
-	@GetMapping(path="/test")
-	public @ResponseBody String test() {
-		return "Test";
+	@GetMapping(path="/getAllMovieWatched")
+	public @ResponseBody  HashMap<String, DisplayMovie> getAllMovieWatched() {
+		
+		
+//		HashMap<String, String> hashMap = new HashMap<>();
+//		HashMap<String, String> hashMap2 = new HashMap<>();
+//		this.movieService.getMovieGenre("1");
+////		hashMap = this.movieService.getServiceMovieGenre();
+//		hashMap.put("movieName", "Ant Man 2");
+//		hashMap.put("movieYear", "2018");
+//		hashMap.put("movieGenre", "Action, Comedy");
+//		hashMap.put("moviePublisher", "Marvel Studios");
+//		hashMap2.put("movieName", "Avengers");
+//		hashMap2.put("movieYear", "2019");
+//		hashMap2.put("movieGenre", "Action, Comedy, Romance");
+//		hashMap2.put("moviePublisher", "Marvel Studios, DC Universe");
+		HashMap<String, DisplayMovie> results = new HashMap<>();
+		results = this.movieService.getServiceAllDisplayMovie();
+//		results.put("results", hashMap);
+//		results.put("results2", hashMap2);
+		return results;
 	}
 	
 	@GetMapping(path = "/addMovie")
@@ -52,7 +66,7 @@ public class MovieController {
 		return hashMap;
 	}
 	
-	@GetMapping(path = "/addGenre")
+	@GetMapping(path = "addGenre")
 	public @ResponseBody HashMap<String, String> addGenre(@RequestParam String movieName, @RequestParam String movieYear, @RequestParam String genreName) {
 		HashMap<String, String> hashMap = new HashMap<>();
 		hashMap = this.movieService.getServiceMovieLogger();

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import Home from '../Home/Home';
+require('../Routes')
 
 
 class WatchList extends Component {
@@ -16,7 +19,7 @@ class WatchList extends Component {
                 {
                     "id": "movieYear",
                     "value": "Movie Year",
-                    "type": "text"
+                    "type": "number"
                 },
                 {
                     "id": "movieGenre",
@@ -28,13 +31,14 @@ class WatchList extends Component {
                     "value": "Publisher",
                     "type": "text"
                 },
-                {
-                    "id": "movieRater",
-                    "value": "Rater",
-                    "type": "text"
-                },
+                // {
+                //     "id": "movieRater",
+                //     "value": "Rater",
+                //     "type": "text"
+                // },
             ],
-            ipAddress: "localhost"
+            ipAddress: "localhost",
+            port: 8550
         }
     }
     clearForm = (event) => {
@@ -72,41 +76,74 @@ class WatchList extends Component {
             alert("Please enter movie rater");
         }
         else {
-            this.addMovie();
+            // this.addMovieWithAllDetails();
+            
         }
     };
 
-   
+   onClickRedirect = (event) => {
+       event.preventDefault(); 
+       return (
+        <Router>
+        <div>
+             <Route exact path="/home" component={Home} />
+             <Redirect push to='/home'/>
+        </div>
+        </Router>
+       )       
+   }
+
+   addMovieWithAllDetails = () => {
+    this.addMovie();
+    this.addGenre();
+    this.addPublisher();
+   }
     addMovie = () => {
-        fetch("http://" + this.state.ipAddress + ":8090/movie/addMovie?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "")
+        fetch("http://" + this.state.ipAddress + ":" + this.state.port + "/movie/addMovie?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "")
             .then(response => response.json())
             .then(data => {
                 switch (data.code) {
                     case "Saved":
-                        alert("Movie added. Thank you");
+                        console.log("Movie added. Thank you");
                         break;
                     default:
-                        alert(data.code);
+                        console.log(data.code);
                 }
             })
             .catch(function (error) {
-                alert("Error: " + error);
+                console.log("Error: " + error);
             })
     }
     addGenre = () => {
-        fetch("http://" + this.state.ipAddress + ":8090/movie/addGenre?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&movieGenre=" + document.getElementById('movieGenre').value + "")
+        fetch("http://" + this.state.ipAddress + ":" +this.state.port+ "/movie/addGenre?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&genreName=" + document.getElementById('movieGenre').value + "")
             .then(response => response.json())
             .then(data => {
                 switch (data.code) {
                     case "Saved":
-                        alert("Genre added. Thank you");
+                        console.log("Genre added. Thank you");
                         break;
                     default:
-                        alert(data.code);
+                        console.log(data.code);
                 }
             })
             .catch(function (error) {
-                alert("Error: " + error);
+                console.log("Error: " + error);
+            })
+    }
+    addPublisher = () => {
+        fetch("http://" + this.state.ipAddress + ":" +this.state.port+ "/movie/addPublisher?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&publisherName=" + document.getElementById('moviePublisher').value + "")
+            .then(response => response.json())
+            .then(data => {
+                switch (data.code) {
+                    case "Saved":
+                        console.log("Publisher added. Thank you");
+                        break;
+                    default:
+                        console.log(data.code);
+                }
+            })
+            .catch(function (error) {
+                console.log("Error: " + error);
             })
     }
     render() {
@@ -134,7 +171,7 @@ class WatchList extends Component {
                                 </tr>
                                 <tr align="center">
                                     <td><button type="Reset" onClick={this.clearForm}>Clear</button></td>
-                                    <td><button onClick={this.validateForm}>Submit</button></td>
+                                    <td><button onClick={this.onClickRedirect}>Submit</button></td>
                                 </tr>
                             </table>
                         </form>
