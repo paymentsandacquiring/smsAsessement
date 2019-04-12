@@ -7,7 +7,7 @@ import java.util.Properties;
 
 
 public class DatabaseFactory {
-	public final static Connection getConnection() {
+	public static final Connection getConnection() {
 		Connection connection = null;
 		
 		try {

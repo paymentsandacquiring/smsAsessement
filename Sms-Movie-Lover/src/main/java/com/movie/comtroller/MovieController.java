@@ -1,7 +1,6 @@
 package com.movie.comtroller;
 
 import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,8 @@ import com.movie.repository.MovieResults;
 import com.movie.service.MovieService;
 
 @Controller
-@CrossOrigin(origins = "*")
-@RequestMapping(path = "/movie")
+@CrossOrigin(origins="*")
+@RequestMapping(path="/formtest")
 public class MovieController {
 	private MovieService movieService;
 	
@@ -38,6 +37,10 @@ public class MovieController {
 	}
 	
 	
+	@GetMapping(path="/test")
+	public @ResponseBody String test() {
+		return "Test";
+	}
 	
 	@GetMapping(path = "/addMovie")
 	public @ResponseBody HashMap<String, String> addMovie(@RequestParam String movieName, @RequestParam String movieYear) {

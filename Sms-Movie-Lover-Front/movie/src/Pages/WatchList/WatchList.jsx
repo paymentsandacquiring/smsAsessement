@@ -78,7 +78,7 @@ class WatchList extends Component {
 
    
     addMovie = () => {
-        fetch("http://" + this.state.ipAddress + ":8080/movie/addMovie?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "")
+        fetch("http://" + this.state.ipAddress + ":8090/movie/addMovie?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "")
             .then(response => response.json())
             .then(data => {
                 switch (data.code) {
@@ -94,7 +94,7 @@ class WatchList extends Component {
             })
     }
     addGenre = () => {
-        fetch("http://" + this.state.ipAddress + ":8080/movie/addGenre?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&movieGenre=" + document.getElementById('movieGenre').value + "")
+        fetch("http://" + this.state.ipAddress + ":8090/movie/addGenre?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&movieGenre=" + document.getElementById('movieGenre').value + "")
             .then(response => response.json())
             .then(data => {
                 switch (data.code) {

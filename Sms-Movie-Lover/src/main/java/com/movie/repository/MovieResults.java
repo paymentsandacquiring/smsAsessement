@@ -17,6 +17,6 @@ public class MovieResults {
 	
 	public void setAllMovieResults(Movie movie) {
 		this.movieResults.put(String.valueOf(movie.getMovieId()), movie);
-		System.err.println(this.movieResults);
+//		System.err.println(this.movieResults);
 	}
 }
