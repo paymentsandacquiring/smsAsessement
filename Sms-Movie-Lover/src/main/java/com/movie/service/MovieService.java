@@ -8,6 +8,7 @@ import com.example.demo.MovieCast;
 import com.example.demo.MovieGenre;
 import com.example.demo.MoviePublisher;
 import com.example.demo.MovieRater;
+import com.movie.model.DisplayMovie;
 import com.movie.repository.MovieRepository;
 import com.movie.repository.MovieResults;
 
@@ -73,6 +74,15 @@ public class MovieService {
 		}
 	}
 	
+	public HashMap<String, DisplayMovie> getServiceAllDisplayMovie(){
+		getAllDisplayMovie();
+		return this.movieRepository.getMovieResults().getMovieDisplayResults();
+	}
+	
+	public void getAllDisplayMovie() {
+		this.movieRepository.getDisplayMovie();
+	}
+	
 	public void getAllMovies() {
 		this.movieRepository.getAllMovie();
 	}
@@ -83,6 +93,24 @@ public class MovieService {
 	
 	public HashMap<String, String> getServiceMovieLogger() {
 		return this.movieRepository.getMovieLogger().getHashMap();
+	}
+	
+	public HashMap<String, String> getServiceMovieGenre(String movieId) {
+		getMovieGenre(movieId);
+		return this.movieRepository.getMovieResults().getMovieGenre();
+	}
+	
+	public void getMovieGenre(String movieId) {
+		this.movieRepository.getMovieGenres(movieId);
+	}
+	
+	public HashMap<String, String> getServiceMoviePublisher(String movieId) {
+		getMoviePublisher(movieId);
+		return this.movieRepository.getMovieResults().getMoviePublisher();
+	}
+	
+	public void getMoviePublisher(String movieId) {
+		this.movieRepository.getMoviePublishers(movieId);
 	}
 	
 	//getting the id for the middle tables

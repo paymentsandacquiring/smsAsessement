@@ -46,7 +46,7 @@ class NavBar extends Component{
             <div class="mainHomeDiv">
                 <div class="topnav">
                     <Link class={this.state.activeHome} to="">Home</Link>
-                    <Link class={this.state.activeList} to="/list">Watch List</Link>
+                    <Link class={this.state.activeList} to="/list">Add Movie</Link>
                     <Link class={this.state.activeRating} to='/ratings'>Ratings</Link>
                     <Link class={this.state.activeCollection} to='/collection'>Collection</Link>
                     <input type="text" placeholder="Search.." />
