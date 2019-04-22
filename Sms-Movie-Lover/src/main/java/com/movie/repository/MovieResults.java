@@ -58,15 +58,15 @@ public class MovieResults {
 	public String formatGenre() {
 		
 		this.movieGenres.forEach((k, v)->{
-			formattedGenre += this.movieGenres.get(k)+", ";
+			formattedGenre += this.movieGenres.get(v)+", ";
 		});
 		formattedGenre = formattedGenre.substring(0, formattedGenre.length() - 2);
 		return formattedGenre;
 	}
 	public String formatPublisher() {
-		
+		System.out.println(moviePublishers);
 		this.moviePublishers.forEach((k, v)->{
-			formattedPublisher += this.moviePublishers.get(k)+", ";
+			formattedPublisher += this.moviePublishers.get(v)+", ";
 		});
 		formattedPublisher = formattedPublisher.substring(0, formattedPublisher.length() - 2);
 		return formattedPublisher;
