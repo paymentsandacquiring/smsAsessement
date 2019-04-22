@@ -38,7 +38,7 @@ class WatchList extends Component {
                 // },
             ],
             ipAddress: "localhost",
-            port: 8550
+            port: 8560
         }
     }
     clearForm = (event) => {
@@ -82,6 +82,7 @@ class WatchList extends Component {
     };
 
    onClickRedirect = (event) => {
+       this.addMovieWithAllDetails();
        event.preventDefault(); 
        return (
         <Router>

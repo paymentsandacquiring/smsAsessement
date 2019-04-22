@@ -31,7 +31,7 @@ class Home extends Component {
                     },
                 ],
             ipAddress: "localhost",
-            port: "8550"
+            port: "8560"
         }
     }
 
@@ -108,6 +108,12 @@ class Home extends Component {
         axios.get("http://" + this.state.ipAddress + ":"+ this.state.port + "/movie/getAllMovieWatched")
             .then(response => response.data)
             .then(data => {
+                console.log(data)
+                if(data === null || data === ""){
+                    console.log("data is null");
+                }else{
+                    console.log("not empty")
+                }
                 var list = [];
                 Object.keys(data).map(function (key, index) {
                     let value = data[key];

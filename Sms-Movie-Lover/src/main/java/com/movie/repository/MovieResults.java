@@ -39,6 +39,7 @@ public class MovieResults {
 	
 	public void setMovieGenre(String movieGenre) {
 		this.movieGenres.put(movieGenre, movieGenre);
+		this.formattedGenre = "";
 	}
 	
 	public HashMap<String, String> getMovieGenre() {
@@ -47,6 +48,7 @@ public class MovieResults {
 	
 	public void setMoviePublisher(String moviePublisher) {
 		this.moviePublishers.put(moviePublisher, moviePublisher);
+		this.formattedPublisher = "";
 	}
 	
 	public HashMap<String, String> getMoviePublisher() {
