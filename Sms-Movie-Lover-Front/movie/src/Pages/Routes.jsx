@@ -4,6 +4,8 @@ import Home from "./Home/Home";
 import WatchList from "./WatchList/WatchList";
 import Ratings from "./Ratings/Ratings";
 import Collection from "./Collection/Collection";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 class Routes extends React.Component{
     render(){
@@ -16,6 +18,8 @@ class Routes extends React.Component{
                         <Route path="/home" component={Home} />
                         <Route path='/ratings' component={Ratings} />
                         <Route path='/collection' component={Collection} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/register" component={Register} />
                     </div>
                 </Router>
             </div>

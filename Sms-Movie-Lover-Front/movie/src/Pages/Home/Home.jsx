@@ -4,6 +4,7 @@ import createReactClass from 'create-react-class';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import NavBar from '../NavBar/NavBar';
+import './Home.css'
 
 class Home extends Component {
     constructor() {
@@ -51,12 +52,26 @@ class Home extends Component {
                     <form id="adminTable">
                         <h1><u>All movies Watched</u></h1>
                         <div id="tableComponent">Loading...</div>
+                        <div id="cardComponent">Loading...</div>
                     </form>
                 </div>
             </div>
         );
     };
     componentDidMount() {
+        var CardComponent = createReactClass({render: function(){
+            return(
+                <div class="card">
+                <img class="cardPic" src="" alt="" />
+            <div class="container">
+               [movie name]<br/>
+               [movie year]<br/>
+               [publisher] [genre]
+            </div>
+        </div>
+            );
+        }});
+
         var TableComponent = createReactClass({
             render: function () {
                 let dataColumns = this.props.data.columns;
@@ -98,7 +113,8 @@ class Home extends Component {
                         </tr>);
                 });
 
-                return (<table id="adminTable" className="table table-bordered table-hover" width="100%">
+                return (
+                <table id="adminTable" className="table table-bordered table-hover" width="100%">
                     {tableHeaders}
                     {tableBody}
                 </table>)
@@ -136,6 +152,8 @@ class Home extends Component {
 
                 ReactDOM.render(
                     <TableComponent data={tableData} />, document.getElementById('tableComponent'));
+                ReactDOM.render(
+                    <CardComponent data={tableData} />, document.getElementById('cardComponent'));
             })
             .catch(function (error) {
                 alert("Error: " + error);

@@ -5,37 +5,36 @@ import NavBar from '../NavBar/NavBar';
 import Home from '../Home/Home';
 require('../Routes')
 
-
-class WatchList extends Component {
+class Register extends Component{
     constructor() {
         super();
         this.state = {
             data: [
                 {
-                    "id": "movieName",
-                    "value": "Movie Name",
+                    "id": "firstName",
+                    "value": "First Name",
                     "type": "text"
                 },
                 {
-                    "id": "movieYear",
-                    "value": "Movie Year",
-                    "type": "number"
-                },
-                {
-                    "id": "movieGenre",
-                    "value": "Genre",
+                    "id": "lastName",
+                    "value": "Last Name",
                     "type": "text"
                 },
                 {
-                    "id": "moviePublisher",
-                    "value": "Publisher",
+                    "id": "email",
+                    "value": "Email",
                     "type": "text"
                 },
-                // {
-                //     "id": "movieRater",
-                //     "value": "Rater",
-                //     "type": "text"
-                // },
+                {
+                    "id": "Gender",
+                    "value": "gender",
+                    "type": "radio"
+                },
+                {
+                    "id": "password",
+                    "value": "Password",
+                    "type": "password"
+                },
             ],
             ipAddress: "localhost",
             port: 8560
@@ -44,45 +43,44 @@ class WatchList extends Component {
     clearForm = (event) => {
         event.preventDefault();
 
-        document.getElementById('movieName').value = "";
-        document.getElementById('movieYear').value = "";
-        document.getElementById('movieGenre').value = "";
-        document.getElementById('moviePublisher').value = "";
-        document.getElementById('movieRater').value = "";
+        document.getElementById('firstName').value = "";
+        document.getElementById('lastName').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('gender').value = "";
+        document.getElementById('password').value = "";
     };
    
     validateForm = (event) => {
         event.preventDefault();
 
-        let movieName = document.getElementById('movieName').value
-        let movieYear = document.getElementById('movieYear').value
-        let movieGenre = document.getElementById('movieGenre').value
-        let moviePublisher = document.getElementById('moviePublisher').value
-        let movieRater = document.getElementById('movieRater').value
+        let firstName = document.getElementById('firstName').value
+        let lastName = document.getElementById('lastName').value
+        let email = document.getElementById('email').value
+        let gender = document.getElementById('gender').value
+        let password = document.getElementById('password').value
 
-        if ((movieName === null) || (movieName === "")) {
-            alert("Please enter movie name");
+        if ((firstName === null) || (firstName === "")) {
+            alert("Please enter first name");
         }
-        else if ((movieYear === null) || (movieYear === "")) {
-            alert("Please enter movie year");
+        else if ((lastName === null) || (lastName === "")) {
+            alert("Please enter last name");
         }
-        else if ((movieGenre === null) || (movieGenre === "")) {
-            alert("Please enter movie genre");
+        else if ((email === null) || (email === "")) {
+            alert("Please email");
         }
-        else if ((moviePublisher === null) || (moviePublisher === "")) {
-            alert("Please enter movie publisher");
+        else if ((gender === null) || (gender === "")) {
+            alert("Please select");
         }
-        else if ((movieRater === null) || (movieRater === "")) {
-            alert("Please enter movie rater");
+        else if ((password === null) || (password === "")) {
+            alert("Please enter password");
         }
         else {
-            this.addMovieWithAllDetails();
-            
+           this.addMovieUser();            
         }
     };
 
    onClickRedirect = (event) => {
-       this.addMovieWithAllDetails();
+      this.addMovieUser();
        event.preventDefault(); 
        return (
         <Router>
@@ -94,50 +92,13 @@ class WatchList extends Component {
        )       
    }
 
-   addMovieWithAllDetails = () => {
-    this.addMovie();
-    this.addGenre();
-    this.addPublisher();
-   }
-    addMovie = () => {
-        fetch("http://" + this.state.ipAddress + ":" + this.state.port + "/movie/addMovie?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "")
+    addMovieUser = () => {
+        fetch("http://" + this.state.ipAddress + ":" + this.state.port + "/movie/addMovieUser?firstName=" + document.getElementById('firstName').value + "&lastName=" + document.getElementById('lastName').value + "")
             .then(response => response.json())
             .then(data => {
                 switch (data.code) {
                     case "Saved":
-                        console.log("Movie added. Thank you");
-                        break;
-                    default:
-                        console.log(data.code);
-                }
-            })
-            .catch(function (error) {
-                console.log("Error: " + error);
-            })
-    }
-    addGenre = () => {
-        fetch("http://" + this.state.ipAddress + ":" +this.state.port+ "/movie/addGenre?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&genreName=" + document.getElementById('movieGenre').value + "")
-            .then(response => response.json())
-            .then(data => {
-                switch (data.code) {
-                    case "Saved":
-                        console.log("Genre added. Thank you");
-                        break;
-                    default:
-                        console.log(data.code);
-                }
-            })
-            .catch(function (error) {
-                console.log("Error: " + error);
-            })
-    }
-    addPublisher = () => {
-        fetch("http://" + this.state.ipAddress + ":" +this.state.port+ "/movie/addPublisher?movieName=" + document.getElementById('movieName').value + "&movieYear=" + document.getElementById('movieYear').value + "&publisherName=" + document.getElementById('moviePublisher').value + "")
-            .then(response => response.json())
-            .then(data => {
-                switch (data.code) {
-                    case "Saved":
-                        console.log("Publisher added. Thank you");
+                        console.log("Movie user added. Thank you");
                         break;
                     default:
                         console.log(data.code);
@@ -148,19 +109,19 @@ class WatchList extends Component {
             })
     }
     render() {
-        const active = "list";
+        const active = "register";
         return (
             <div class="mainHomeDiv">
                 <div class="topnav">
                     <NavBar data={active} />
                 </div>
-                <div class="watchListBody">
+                <div class="registerBody">
                     <p>
-                        This is the watchList, where you can add a movie that you have watched.
+                        This is the register, where you can register.
                     </p>
                     <div align="center" class="App-header">
                         <form>
-                            <h1>Add A Movie</h1>
+                            <h1>Register</h1>
                             <table >
                                 <tr>
                                     <td>
@@ -206,21 +167,21 @@ class FieldType extends Component {
         }
     }
     fieldValueWasEntered = (event) => {
-        if (event.target.id === "movieYear") {
+        if (event.target.id === "") {
             let alphabet = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ""];
 
             if (alphabet.includes(event.target.value.substring(event.target.value.length - 1).toLowerCase())) {
                 this.setState({ [event.target.id]: event.target.value })
             }
         }
-        else if ((event.target.id === "movieGenre") || (event.target.id === "moviePublisher") || (event.target.id === "movieRater")) {
+        else if ((event.target.id === "firstName") || (event.target.id === "lastName") || (event.target.id === "movieRater")) {
             let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", ""];
 
             if (alphabet.includes(event.target.value.substring(event.target.value.length - 1).toLowerCase())) {
                 this.setState({ [event.target.id]: event.target.value })
             }
         }
-        else if (event.target.id === "movieName") {
+        else if (event.target.id === "password") {
             let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ", ""];
 
             if (alphabet.includes(event.target.value.substring(event.target.value.length - 1).toLowerCase())) {
@@ -241,4 +202,4 @@ class FieldType extends Component {
         );
     }
 }
-export default WatchList;
+export default Register;

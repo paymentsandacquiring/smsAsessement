@@ -16,20 +16,30 @@ public class MovieUser {
 	private String  lastName;
 	private String gender;
 	private String email;
+	private String password;
 	
 	public MovieUser() {
 		this.userId = 0;
-		this.firstName = this.lastName = this.gender = this.email = "";
+		this.firstName = this.lastName = this.gender = this.email = this.password = "";
 	}//end default constructor
 		
-	public MovieUser(int userId, String firstName, String lastName, String gender, String email) {
+	public MovieUser(int userId, String firstName, String lastName, String gender, String email, String password) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.email = email;
+		this.password = password;
 	}//end primary constructor
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public int getUserId() {
 		return userId;

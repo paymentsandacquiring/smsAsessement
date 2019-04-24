@@ -8,6 +8,7 @@ import com.example.demo.MovieCast;
 import com.example.demo.MovieGenre;
 import com.example.demo.MoviePublisher;
 import com.example.demo.MovieRater;
+import com.example.demo.MovieUser;
 import com.movie.model.DisplayMovie;
 import com.movie.repository.MovieRepository;
 import com.movie.repository.MovieResults;
@@ -24,6 +25,14 @@ public class MovieService {
 	
 	public MovieService(MovieRepository repository) {
 		this.movieRepository = repository;
+	}
+	
+	public void addMovieUser(MovieUser movieUser) {
+		if(isMovieUserAlreadyAdded(movieUser.getEmail())) {
+			this.movieRepository.getMovieLogger().addCode("Movie already exists");
+		}else {
+			this.movieRepository.addMovieUser(movieUser);
+		}
 	}
 	
 	public void addMovie(Movie movie) {
@@ -162,6 +171,13 @@ public class MovieService {
 	}
 	
 	//validate
+	//check if the user is already added
+	private boolean isMovieUserAlreadyAdded(String userEmail) {
+		if(this.movieRepository.getIdUsingOneCol("email", "movie_user", userEmail, "user_id") == -1)
+			return false;
+		return true;
+	}
+	
 	//check if the movie exists
 	private boolean isMovieAlreadyAdded(String movieName, String movieYear) {
 		if(this.movieRepository.getIdUsingTwoCol("movie_name", "movie_year", "movie", movieName, movieYear, "movie_id") == -1)

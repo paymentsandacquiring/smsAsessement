@@ -13,6 +13,7 @@ import com.example.demo.MovieCast;
 import com.example.demo.MovieGenre;
 import com.example.demo.MoviePublisher;
 import com.example.demo.MovieRater;
+import com.example.demo.MovieUser;
 import com.movie.model.DisplayMovie;
 
 public class MovieRepository {
@@ -25,6 +26,21 @@ public class MovieRepository {
 		this.movieLogger = movieLogger;
 		this.movieResults = movieResults;
 	}//end default 
+	
+	public void addMovieUser(MovieUser movieUser) {
+		try {
+			Statement statement = this.connection.createStatement();
+			
+			String query = "INSERT INTO public.movie_user(email, first_name, gender, last_name) VALUES ('"+movieUser.getEmail()+"','"+movieUser.getFirstName()+"','"+movieUser.getGender()+"','"+movieUser.getLastName()+"')";
+			
+			boolean saved = statement.execute(query);
+			
+			this.movieLogger.addTable("movieUser");
+			this.movieLogger.addCode(!saved?"Saved":"Error saving data!");			
+		}catch (SQLException sql) {
+			this.movieLogger.addEXCEPTION("Error updating movieUser table " + sql.getMessage());
+		}
+	}
 	
 	public void addMovie(Movie movie) {
 		try {
@@ -225,6 +241,7 @@ public class MovieRepository {
 			this.movieLogger.addEXCEPTION("Error fetching data " + sql.getMessage());
 		}
 	}
+	
 	public void getMoviePublishers(String pId) {
 		try {
 			Statement statement = this.connection.createStatement();

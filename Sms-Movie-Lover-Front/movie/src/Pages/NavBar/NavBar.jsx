@@ -9,7 +9,9 @@ class NavBar extends Component{
             activeHome: "",
             activeList: "",
             activeRating: "",
-            activeCollection: ""
+            activeCollection: "",
+            activeLogin: "",
+            activeRegister: ""
         }
     }
     componentWillMount(){
@@ -24,6 +26,12 @@ class NavBar extends Component{
         }
         if(this.props.data === "collection"){
             this.highlightCollection();
+        }
+        if(this.props.data === "login"){
+            this.highlightLogin();
+        }
+        if(this.props.data === "register"){
+            this.highlightRegister();
         }
     }
     highlightHome(){
@@ -41,6 +49,14 @@ class NavBar extends Component{
         this.setState({activeCollection:"active"});
     }
 
+    highlightLogin(){
+        this.setState({activeLogin:"active"});
+    }
+
+    highlightRegister(){
+        this.setState({activeRegister:"active"});
+    }
+
     render(){
         return(
             <div class="mainHomeDiv">
@@ -49,6 +65,8 @@ class NavBar extends Component{
                     <Link class={this.state.activeList} to="/list">Add Movie</Link>
                     <Link class={this.state.activeRating} to='/ratings'>Ratings</Link>
                     <Link class={this.state.activeCollection} to='/collection'>Collection</Link>
+                    <Link class={this.state.activeLogin} to="/login">Login</Link>
+                    <Link class={this.state.activeRegister} to="/register">Register</Link>
                     <input type="text" placeholder="Search.." />
                 </div>
             </div>

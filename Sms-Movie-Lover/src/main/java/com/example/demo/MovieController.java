@@ -56,6 +56,16 @@ public class MovieController {
 		return results;
 	}
 	
+	@GetMapping(path= "/addMovieUser")
+	public @ResponseBody HashMap<String, String> addUser(@RequestParam String email, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String gender, @RequestParam String password){
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap = this.movieService.getServiceMovieLogger();
+		this.movieService.addMovieUser(new MovieUser(0,firstName, lastName, gender, email, password));
+		System.err.println(hashMap);
+		
+		return hashMap;
+	}
+	
 	@GetMapping(path = "/addMovie")
 	public @ResponseBody HashMap<String, String> addMovie(@RequestParam String movieName, @RequestParam String movieYear) {
 		HashMap<String, String> hashMap = new HashMap<>();
